@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body, div, img, ul, li, a, h2, span {
+      margin: 0;
+      padding: 0;
+    }
+    ul {
+      list-style: none;
+    }
+    a {
+      text-decoration: none;
+    }
+    img {
+      border: none;
+    }
+    body {
+      font-size: 12px;
+      color: #222;
+    }
+
+    .book_wrap {
+      width: 350px;
+      height: 540px;
+      margin: 50px auto;
+      position: relative;
+    }
+
+    .book_wrap h2 {
+      padding: 0 0 5px 10px;
+    }
+    .btn_left {
+      position: absolute;
+      top: 180px;
+      left: 0;
+      width: 23px;
+      height: 41px;
+      overflow: hidden;
+      display: block;
+    }
+    /* 화살표 버튼 색상 start */
+    .btn_left a.on {
+      margin-left: -23px;
+    }
+    /* 화살표 버튼 색상 end*/
+    .btn_right {
+      position: absolute;
+      top: 180px;
+      right: 0;
+      width: 23px;
+      height: 41px;
+      overflow: hidden;
+      display: block;
+    }
+    /* 화살표 버튼 색상 start */
+    .btn_right a.on {
+      margin-left: -23px;
+    }
+    /* 화살표 버튼 색상 end */
+    .bookList {
+      width: 270px;
+      margin: 0 auto;
+    }
+    .displayNone {
+      display: none;
+    }
+
+    .iconList {
+      text-align: center;
+    }
+    .iconList li {
+      display: inline-block;
+      padding: 0 0 0 5px;
+    }
+  </style>
+  <script>
+    var iconlist;
+    var booklist;
+    var currentNum=0;
+    var menuNum=0;
+
+    function init(){
+      // console.log('1')
+      iconlist=document.getElementById('iconList').getElementsByTagName('li')
+      // css에서 사용했던 클래스를 스크립트에서 같이 사용하면 심각한 오류가 발생할 수 있음
+      // console.log(iconlist)
+      booklist=document.getElementById('bookList').getElementsByTagName('span')
+      // console.log(booklist)
+      for(var i=0; i<iconlist.length; i++){
+        iconlist[i].getElementsByTagName('a')[0].num=i;
+        iconlist[i].getElementsByTagName('a')[0].onmouseover=function(){
+        // iconlist의 i번째의 0번째 a태그에다가 마우스 올렸을 때
+          // console.log(this.num)
+          // a태그가 몇번째인지
+          
+          menuNum=this.num;
+          // 나 자신의 번호를 menuNum에 넘겨줄거야
+          // selectMenu(this.num)
+          selectMenu(menuNum)
+        }
+        // console.log()
+      }
+      // 화살표 버튼 색상 start
+      document.getElementById('btn_left').onmouseover=function(){
+        this.className="on"
+      }
+      document.getElementById('btn_left').onmouseout=function(){
+        this.className=""
+      }
+      document.getElementById('btn_right').onmouseover=function(){
+        this.className="on"
+      }
+      document.getElementById('btn_right').onmouseout=function(){
+        this.className=""
+      }
+      // 화살표 버튼 색상 end
+    }  
+      function selectMenu(num){
+        // console.log(num)
+        if(currentNum!=num){
+          // console.log(num)
+          // 1,2,3번을 선택하면 콘솔창에서 알려주는데, 0번째(처음에 하늘색인 버튼은 선택되어있어서)는 안 알려줌(조건에 맞지 않아서)
+        
+          var btn1=iconlist[currentNum].getElementsByTagName('img')[0]
+          // 내가 현재 보고 있는거. 첫번째 img에 접근
+          // console.log(btn1)
+          btn1.src=btn1.src.replace('_on.gif','_off.gif')
+          booklist[currentNum].className='displayNone'
+
+          var btn2=iconlist[num].getElementsByTagName('img')[0]
+          // 여기서 num은 내가 선택한거
+          btn2.src=btn2.src.replace('_off.gif','_on.gif')
+          // 내가 선택한 버튼의 src를 off에서 on으로 변경
+          booklist[num].className=""
+
+          currentNum=num
+        }
+      }
+
+    
+      function prevBtn(){
+        // console.log(menuNum--);
+        menuNum--;
+        if(menuNum<0){
+          menuNum=iconlist.length-1;
+        }
+        selectMenu(menuNum)
+      }
+
+      function nextBtn(){
+        // console.log(menuNum++);
+        menuNum++;
+        if(menuNum>iconlist.length-1){
+          menuNum=0;
+        }
+        selectMenu(menuNum)
+      }
+    window.onload=init;
+  </script>
+</head>
+<body>
+  <div class="book_wrap">
+    <h2>
+      <img src="./ex3/tit_interpark_recom.gif" alt="">
+      <a href="">
+        <img src="./ex3/btn_more.gif" alt="">
+      </a>
+    </h2>
+    <div class="btn">
+      <span class="btn_left">
+        <a href="" id="btn_left" onclick="prevBtn(); return false;"><img src="./ex3/btn_i_left.png" alt=""></a>
+                            <!-- 함수의 이름을 지정하고 작업 -->
+                            <!-- 얘를 쓰지않고 id 값으로 했을 경우, 함수의 이름을 지정하지 않고 변수에 담아서 작업하는거 -->
+                  <!-- 버튼의 색상 하늘색으로 바꿔줌 -->
+      </span>
+      
+      <span class="btn_right">
+        <a href="" id="btn_right" onclick="nextBtn(); return false;"><img src="./ex3/btn_i_right.png" alt=""></a>
+      </span>
+    </div>
+
+    <div class="bookList" id="bookList">
+      <span>
+        <a href="">
+          <img src="./ex3/book1.jpg" alt="">
+        </a>
+      </span>
+      
+      <span class="displayNone">
+        <a href="">
+          <img src="./ex3/book2.jpg" alt="">
+        </a>
+      </span>
+
+      <span class="displayNone">
+        <a href="">
+          <img src="./ex3/book3.jpg" alt="">
+        </a>
+      </span>
+
+      <span class="displayNone">
+        <a href="">
+          <img src="./ex3/book4.jpg" alt="">
+        </a>
+      </span>
+    </div>
+    <ul class="iconList" id="iconList">
+      <li>
+        <a href=""><img src="./ex3/i_on.gif" alt=""></a>
+      </li>
+      <li>
+        <a href=""><img src="./ex3/i_off.gif" alt=""></a>
+      </li>
+      <li>
+        <a href=""><img src="./ex3/i_off.gif" alt=""></a>
+      </li>
+      <li>
+        <a href=""><img src="./ex3/i_off.gif" alt=""></a>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>

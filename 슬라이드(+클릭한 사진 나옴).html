@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body, div, img, ul, li, a {
+      margin: 0;
+      padding: 0;
+    }
+    ul{
+      list-style-type: none;
+    }
+    a {
+      text-decoration: none;
+      color: #333;
+    }
+    img {
+      border: none;
+    }
+    body {
+      font-size: 12px;
+      color: #333;
+      font-family: serif;
+    }
+    .gallery {
+      width: 510px;
+      height: 560px;
+      margin: 50px auto;
+      border: 1px solid #999;
+      padding: 1px;
+    }
+    .photo img {
+      width: 510px;
+      height: 390px;
+    }
+    .photo_list {
+      width: 480px;
+      margin: 0 auto;
+      height: 160px;
+      overflow: hidden;
+    }
+    .photo_list .list {
+      width: 1300px;
+    }
+    .photo_list .list li {
+      float: left;
+      margin: 5px;
+    }
+
+    .btn_group {
+      position: relative;
+      bottom: 120px;
+      width: 510px;
+      height: 71px;
+      /* border: 1px solid #000; */
+    }
+    .btn_group a {
+      width: 31px;
+      height: 71px;
+      display: inline-block;
+      position: absolute;
+    }
+    .btn_group .leftBtn {
+      left: 0;
+    }
+    .btn_group .rightBtn {
+      right: 0;
+    }
+  </style>
+  <script>
+    window.onload=function(){
+      var list_zone = document.getElementById('inner_list');
+      var list_a = list_zone.getElementsByTagName('a');
+      // list_zone안에 잇는 'a'를 부름 
+      // console.log(list_a)      8개
+      for(var i =0; i<list_a.length; i++){
+        // a의 개수만큼(8번)돌려서
+        list_a[i].onclick=function(){
+        // i번째 a를 누르면 (a태그를 클릭했을 때)
+          var ph = document.getElementById('photo').children[0];
+          // photo 안에 있는  첫번째 자식을 찾아서 ph에 넣음
+
+            // console.log(ph)
+            // a태그에 onclick를 하면 바로 또 실행됌
+
+            ph.src=this.href;
+            return false;
+          
+        }
+      }
+
+      var before_btn=document.getElementById('before_btn');
+      var next_btn=document.getElementById('next_btn');
+      var num = 0;
+      before_btn.onclick=function(){
+        if(num<=0) return false;
+        num--;
+        list_zone.style.marginLeft=-160*num+'px';
+        return false;
+      }
+
+      next_btn.onclick=function(){
+        if(num>=list_a.length-3)return false;
+        // return false를 여기에  작성한 이유 : 항상 3개는 남아있어야하기 때문에
+          num++;
+          list_zone.style.marginLeft=-160*num+'px';
+          // left라고 쓰지않고 marginLeft라고 쓴 이유
+          // list_zone 부분에 position:absolut를 쓰지 않아서
+          // position:absolute를 썼으면 당연히 left값을 가지고 작업을 하면 편함
+
+          // position:absolut를 쓰고 marginLeft 대신 left를 쓰는게 더 좋음
+          return false;
+          // return false를 작성한 이유: a링크  태그라서
+          // 링크 태그 실행 안 되고 onclick만 실행 시키기 위해
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="gallery">
+    <div class="photo" id="photo">
+      <img src="./ex3/pic_1.jpg" alt="">
+    </div>
+    <div class="photo_list">
+      <ul class="list" id="inner_list">
+        <li>
+          <a href="./ex3/pic_1.jpg">
+            <img src="./ex3/btn1.png" alt="">
+          </a>
+        </li>
+        
+        <li>
+          <a href="./ex3/pic_2.jpg">
+            <img src="./ex3/btn2.png" alt="">
+          </a>
+        </li>
+
+        <li>
+          <a href="./ex3/pic_3.jpg">
+            <img src="./ex3/btn3.png" alt="">
+          </a>
+        </li>
+
+        <li>
+          <a href="./ex3/pic_4.jpg">
+            <img src="./ex3/btn4.png" alt="">
+          </a>
+        </li>
+
+        <li>
+          <a href="./ex3/pic_5.jpg">
+            <img src="./ex3/btn5.png" alt="">
+          </a>
+        </li>
+
+        <li>
+          <a href="./ex3/pic_6.jpg">
+            <img src="./ex3/btn6.png" alt="">
+          </a>
+        </li>
+
+        <li>
+          <a href="./ex3/pic_7.jpg">
+            <img src="./ex3/btn7.png" alt="">
+          </a>
+        </li>
+
+        <li>
+          <a href="./ex3/pic_8.jpg">
+            <img src="./ex3/btn8.png" alt="">
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="btn_group">
+      <a href="" class="leftBtn" id="before_btn"><img src="./ex3/left.png" alt=""></a>
+      <a href="" class="rightBtn" id="next_btn"><img src="./ex3/right.png" alt=""></a>
+    </div>
+  </div>
+</body>
+</html>

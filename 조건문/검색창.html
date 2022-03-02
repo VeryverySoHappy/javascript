@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body, div, h3,input,img,dl,dt,dd,ul,li,a,button,span,strong, form, input {margin: 0; padding: 0;}
+        body, input {
+            font-size: 12px;
+            color:#222;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        ul{
+            list-style: none;
+            overflow: hidden;
+        }
+        img{border: none;}
+        a{text-decoration: none;}
+
+        input, img {
+          vertical-align: middle;
+        }
+        form {
+          border: 5px solid #2eb500;
+          width: 270px;
+          height: 39px;
+          margin: 50px auto;
+        }
+        input[type="text"]{
+          /* 270-52 = 218 - 10(padding) */
+          width: 208px;
+          height: 39px;
+          border: none;
+          padding-left: 10px;
+        }
+    </style>
+    <!-- type="text/javascript"-->
+    <script>
+      function valueText(){
+        let frm=document.searchform;
+        // form 요소의 name을 불러옴
+        if(frm.keyword.value=="검색어를 입력 하세요.") {
+          frm.keyword.value='';
+          return;
+          // 이 부분이 종료가 된다는 뜻
+        }
+        console.log(frm)
+      }
+
+      function searchSend() {
+        let frm=document.searchform;
+        if(frm.keyword.value=="검색어를 입력 하세요." || frm.keyword.value=="")
+                                                                      //공백
+          alert('검색어 입력!!!');
+          frm.keyword.value='';
+          frm.keyword.focus();
+          return;
+        }
+    </script>
+</head>
+<body>
+  <form action="" method="post" name="searchform">
+    <input type="text" title="제품검색" name="keyword" value="검색어를 입력 하세요." onclick="valueText()"><a href="" onclick="searchSend(); return false;"><img src="ex2/searchBtn.png" alt="검색"></a>
+    <!-- 일부러 태그를 붙여놓음  -> 검색이 네모칸 안에 들어감 -->
+  </form>
+</body>
+</html>

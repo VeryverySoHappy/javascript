@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body, div, h3,input,img,dl,dt,dd,ul,li,a,button,span,strong, form, input {margin: 0; padding: 0;}
+    body, input {
+        font-size: 12px;
+        color:#222;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    ul{
+        list-style: none;
+        overflow: hidden;
+    }
+    img{border: none;}
+    a {
+      text-decoration: none;
+      color: #222;
+    }
+
+    .linkWrap {
+      width: 400px;
+      margin: 50px auto;
+      position: relative;
+      border: 5px solid #4c5260;
+    }
+
+    h3 {
+      background-color: #4c5260;
+      line-height: 40px;
+    }
+    h3 a {
+      color: #fff;
+      display: block;
+    }
+    .list li {
+      line-height: 36px;
+      border-bottom: 1px dotted #d9d9d9;
+    }
+    .list li a {
+      padding-left: 10px;
+    }
+    .list li:hover {
+      background-color: #f1f1f1;
+    }
+    .on {
+      position: absolute;
+      right: -5px;
+      bottom: -25px;
+      background-color: #4c5260;
+      padding: 5px;
+      border-radius: 5px;
+    }
+    .on a {
+      color: #fff;
+    }
+    .off {
+      display: none;
+    }
+    .over {
+      display: block;
+    }
+  </style>
+    <!-- type="text/javascript"-->
+    <script>
+      function selectBox(){
+        var listDiv=document.getElementsByClassName('list')[0];
+        if(listDiv.className=="list off") {
+          // 클래스가 list인 부분.클래스 명이 "list off"면
+          listDiv.className="list over"
+        }
+
+        var closeBtn=document.getElementsByClassName('on')[0];
+        closeBtn.onclick=function(){
+          // 함수에 이름이 없어서 변수에 담아서 사용
+          listDiv.className="list off"
+        }
+      }
+    </script>
+</head>
+<body>
+  <div class="linkWrap">
+    <h3><a href="" onclick="selectBox(); return false;">관심 과목 선택</a></h3>
+    <div class="list off">
+      <ul>
+        <li><a href="">일러스트</a></li>
+        <li><a href="">포토샵</a></li>
+        <li><a href="">xd</a></li>
+        <li><a href="">프리미어</a></li>
+        <li><a href="">javascript</a></li>
+        <li><a href="">jquery</a></li>
+      </ul>
+      <!-- <span class="on">닫기</span> -->
+      <!-- 어디로 갈 것도 아니라서 굳이 a를 넣을 필요는 없음 닫기만 하는 역할-->
+      <span class="on"><a href="">닫기</a></span>
+    </div>
+  </div>
+</body>
+</html>
